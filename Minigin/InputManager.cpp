@@ -4,7 +4,11 @@
 
 dae::InputManager::~InputManager()
 {
-	m_Commands.erase(begin(m_Commands), end(m_Commands));
+	for (auto* c : m_Commands)
+	{
+		delete c;
+		c = nullptr;
+	}
 }
 
 bool dae::InputManager::ProcessInput()
@@ -156,7 +160,5 @@ void dae::InputManager::AddNewSceneCommands()
 
 void dae::InputManager::Reset()
 {
-
-
 	m_Skip = true;
 }
